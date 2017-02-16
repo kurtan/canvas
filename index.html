@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+    <head>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <style>
+  body {
+    background: lightblue;
+}
+
+canvas {
+    background: #fff;
+    margin: 20px;
+}
+  </style>
+    </head>
+    <body>
+      <canvas   id=mycanvas> </canvas>
+        <script>
+        var grid=[
+            [0,1,2,3,4,5,6,7,8,9],
+            [0,1,2,3,4,5,6,7,8,9],
+            [0,1,2,3,4,5,6,7,8,9],
+            [0,1,2,3,4,5,6,7,8,9],
+            [0,1,2,3,4,5,6,7,8,9],
+             [0,1,2,3,4,5,6,7,8,9],
+            [0,1,2,3,4,5,6,7,8,9],
+            [0,1,2,3,4,5,6,7,8,9],
+            [0,1,2,3,4,5,6,7,8,9],
+            [0,1,2,3,4,5,6,7,8,9]
+            
+            ];
+     //  var grid=g.map(x=>g);
+     console.log(grid)
+      var t=true;
+       //grid width and height
+var bw = 400;
+var bh = 400;
+//padding around grid
+var p = 10;
+//size of canvas
+var cw = bw + (p*2) + 1;
+var ch = bh + (p*2) + 1;
+var canvas= document.getElementById("mycanvas");
+  elemLeft = canvas.offsetLeft;
+    elemTop = canvas.offsetTop;
+ var context = canvas.getContext("2d");
+  canvas.width=cw ;
+   canvas.height=ch;
+
+canvas.addEventListener('click', function() {
+    var x=Math.floor(((event.pageX-40)/40))
+    var y=Math.floor(((event.pageY-40)/40))
+  var v=grid[x][y];
+  if(isNaN(v)) return;
+   // alert(x+","+y);
+   context.font="20px Georgia";
+  var tkn="X";
+    t==true?tkn='X':tkn="O";
+   context.fillText(tkn,(x+0.5)*40,(y+1)*40);
+   grid[x][y]=tkn;
+
+   // console.log(x,y, grid[x][y])
+    t=!t;
+     } ); 
+   
+
+
+function drawBoard(){
+    for (var x = 0; x <= bw; x += 40) {
+        context.moveTo(0.5 + x + p, p);
+        context.lineTo(0.5 + x + p, bh + p);
+    }
+
+
+    for (var x = 0; x <= bh; x += 40) {
+        context.moveTo(p, 0.5 + x + p);
+        context.lineTo(bw + p, 0.5 + x + p);
+    }
+
+    context.strokeStyle = "black";
+    context.stroke();
+}
+
+drawBoard();
+
+        
+        
+        </script>
+    </body>
+</html>
